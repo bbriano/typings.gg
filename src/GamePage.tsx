@@ -1,3 +1,5 @@
 import "./App.css";
 
-function GamePage() {}
+export function GamePage() {
+  return <div>Game</div>;
+}

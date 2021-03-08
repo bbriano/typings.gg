@@ -1,3 +1,5 @@
 import "./App.css";
 
-function ThemesPage() {}
+export function ThemesPage() {
+  return <div>Themes</div>;
+}

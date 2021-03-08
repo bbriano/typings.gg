@@ -1,3 +1,5 @@
 import "./App.css";
 
-function GuidePage() {}
+export function GuidePage() {
+  return <div>Guide</div>;
+}

@@ -24,16 +24,7 @@ type ModalProps = {
 
 function Modal({ open, onClose = noop, children }: ModalProps) {
   return open ? (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        position: "absolute",
-        top: 0,
-        left: 0,
-        background: "#fff",
-      }}
-    >
+    <div className="modal">
       <button onClick={() => onClose()}>Back</button>
       {children}
     </div>
@@ -49,7 +40,7 @@ type NavBarProps = {
 
 function NavBar({ value, onChange = noop }: NavBarProps) {
   return (
-    <div>
+    <div className="navbar">
       {pages.map((page) => (
         <button disabled={page === value} onClick={() => onChange(page)}>
           {page.label}
@@ -60,18 +51,19 @@ function NavBar({ value, onChange = noop }: NavBarProps) {
 }
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<Page>(pages[0]);
+  const [currentPage, setCurrentPage] = useState<Page>(root);
+  const content = <div className="content">{currentPage.content}</div>;
   return (
-    <>
+    <div className="wrapper">
       {currentPage === root ? (
-        <div>{currentPage.content}</div>
+        content
       ) : (
         <Modal open onClose={() => setCurrentPage(root)}>
-          <div>{currentPage.content}</div>
+          {content}
         </Modal>
       )}
       <NavBar value={currentPage} onChange={(page) => setCurrentPage(page)} />
-    </>
+    </div>
   );
 }
 

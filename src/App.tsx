@@ -12,7 +12,7 @@ type Page = {
 
 const root = { key: "game", content: <GamePage />, label: "game" };
 const pages = [
-  { key: "guide", content: <GuidePage />, label: "guide" },
+  { key: "guide", content: <GuidePage />, label: "user guide" },
   { key: "themes", content: <ThemesPage />, label: "themes" },
 ];
 
@@ -25,7 +25,9 @@ type ModalProps = {
 function Modal({ open, onClose = noop, children }: ModalProps) {
   return open ? (
     <div className="modal">
-      <button onClick={() => onClose()}>Back</button>
+      <div className="modal-navbar">
+        <button onClick={() => onClose()}>{"< back"}</button>
+      </div>
       {children}
     </div>
   ) : (
@@ -41,10 +43,13 @@ type NavBarProps = {
 function NavBar({ value, onChange = noop }: NavBarProps) {
   return (
     <div className="navbar">
-      {pages.map((page) => (
-        <button disabled={page === value} onClick={() => onChange(page)}>
-          {page.label}
-        </button>
+      {pages.map((page, i) => (
+        <div key={page.key}>
+          {!!i && "/"}
+          <button disabled={page === value} onClick={() => onChange(page)}>
+            {page.label}
+          </button>
+        </div>
       ))}
     </div>
   );

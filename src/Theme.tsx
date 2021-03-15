@@ -1,34 +1,35 @@
+import { noop } from "lodash";
 import { createContext, useContext } from "react";
 import "./App.css";
 
-type Theme = {
-  name: string
+export type Theme = {
+  name: string;
   colors: {
     main: {
-      background: string
-      foreground: string
-    }
+      background: string;
+      foreground: string;
+    };
     card: {
-      background: string
-      foreground: string
-    }
+      background: string;
+      foreground: string;
+    };
     textBox: {
-      background: string
-      foreground: string
-    }
+      background: string;
+      foreground: string;
+    };
     redoButton: {
-      background: string
-      foreground: string
-    }
+      background: string;
+      foreground: string;
+    };
     wordHighlights: {
-      current: string
-      correct: string
-      wrong: string
-    }
-  }
+      current: string;
+      correct: string;
+      wrong: string;
+    };
+  };
 };
 
-const defaultThemes: Array<Theme> = [
+export const defaultThemes: Theme[] = [
   {
     name: "light",
     colors: {
@@ -55,11 +56,11 @@ const defaultThemes: Array<Theme> = [
       },
     },
   },
-]
+];
 
-const ThemeContext = createContext<Theme>(
-  defaultThemes[0],
-);
+export type ThemeContextValue = [Theme, (theme: Theme) => void];
+
+const ThemeContext = createContext<ThemeContextValue>([defaultThemes[0], noop]);
 
 export const ThemeProvider = ThemeContext.Provider;
 
